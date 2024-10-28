@@ -107,7 +107,8 @@ class Results:
 
         if "Basic" in folders:
             for folder in os.listdir(self.main_folder + "/Basic"):
-                self._results_per_folder(f"{self.main_folder}Basic/{folder}")
+                if (folder != ".DS_Store"): # NOTA: ignorar carpeta basura
+                    self._results_per_folder(f"{self.main_folder}Basic/{folder}")
             self._load_all_results()
 
         if "Dynamic Topic Modeling" in folders:
@@ -339,7 +340,7 @@ class Results:
         self.dtm_results[dataset] = results
 
     def _load_computation_results(self):
-        path = "../results/Computation/"
+        path = "/app/results/Computation/" # NOTA: se ajusto el path para que funcione con docker
         files = os.listdir(path)
 
         computation = pd.read_csv(path + files[0])

@@ -3,3 +3,18 @@ The results for Table 1 and 2 can be found in `results/Basic/`. The results for 
 
 To run the experiments, you can follow along with the tutorial in `notebooks/Evaluation.ipynb`. 
 To visualize the results from the paper, use `notebooks/Results.ipynb`. 
+
+<!-- NOTAS -->
+BERTopic_tweets_municipalidad preprocesada da mejores resultados en npmi y diversity que la version short, tambien preprocesada
+BERTopic_tweets_municipalidad preprocesada da resultados muy similares respecto a npmi, pero mejora la diversity en relacion al BERTopic_tweets_municipalidad sin preprocesar
+
+<!-- TODO -->
+*Justificar porque usamos spanish_nlp*
+
+<!-- DOCKER -->
+<!-- Build -->
+docker build -t bertopic_v2 .
+<!-- Run and replicate changes -->
+docker run -v C:\Users\gonza\Desktop\J\wFacu\Tesina\Modelos\Validaciones\BERTopic_evaluation:/app bertopic_v2
+<!-- TODO: spanish_nlp (que usamos solo para el preprocesamiento) actualiza las versiones de algunos de los package que usamos, deberiamos o usar otra version que no lo haga o quizas mas facil, hacer el preprocesamiento aparte -->
+<!-- TODO: Ver que la carpeta trump y trump.txt se generen dentro de datasets -->
