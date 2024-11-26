@@ -163,6 +163,7 @@ class Trainer:
             }
             output, computation_time = self._train_tm_model(params_to_use)
             scores = self.evaluate(output)
+            print(output['topics'])
 
             # Update results
             result = {

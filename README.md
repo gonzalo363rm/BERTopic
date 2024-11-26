@@ -18,3 +18,8 @@ docker build -t bertopic_v2 .
 docker run -v C:\Users\gonza\Desktop\J\wFacu\Tesina\Modelos\Validaciones\BERTopic_evaluation:/app bertopic_v2
 <!-- TODO: spanish_nlp (que usamos solo para el preprocesamiento) actualiza las versiones de algunos de los package que usamos, deberiamos o usar otra version que no lo haga o quizas mas facil, hacer el preprocesamiento aparte -->
 <!-- TODO: Ver que la carpeta trump y trump.txt se generen dentro de datasets -->
+
+
+
+Para el filtro de palabras, podriamos considerar que si una palabra de "palabras_no_encontradas" aparece más de n veces, esta bien escrita pero no esta en el diccionario, entonces deberiamos agregarla al mismo
+Ver de usar este package: https://pypi.org/project/pyspellchecker/
