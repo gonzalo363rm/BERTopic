@@ -1,7 +1,7 @@
 from evaluation import Results
 
 print("##########\nRESULTADOS DEL AUTOR\n##########")
-results = Results("../results/", combine_models=True); results.get_keys()
+results = Results("../results/", combine_models=True);
 
 print("##########\nDATASET BBC NEWS\n##########")
 print(results.get_data("BBC_news", aggregated=True))
@@ -15,7 +15,7 @@ print(results.get_data("trump", aggregated=True))
 ##########
 
 print("##########\nRESULTADOS PROPIOS\n##########")
-results2 = Results("/app/own/results/", combine_models=True); results2.get_keys()
+results2 = Results("/app/own/results/", combine_models=True);
 
 print("##########\nDATASET BBC NEWS\n##########")
 print(results2.get_data("BBC_News", aggregated=True))

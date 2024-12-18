@@ -53,6 +53,7 @@ class Results:
                     (dataset, method): "{:.3f}"
                     for dataset in datasets
                     for method in [
+                        "cv"
                         "npmi",
                         "diversity",
                     ]
@@ -131,6 +132,7 @@ class Results:
                     .loc[
                         :,
                         [
+                            "cv",
                             "npmi",
                             "diversity",
                         ],
@@ -157,7 +159,7 @@ class Results:
             }
 
         # Sort by model before concatenating
-        order = data[list(data.keys())[-2]].sort_values("npmi")["Model"].tolist()
+        order = data[list(data.keys())[-1]].sort_values("npmi")["Model"].tolist()
         models = pd.DataFrame({"Model": order})
 
         for dataset in data.keys():
@@ -214,6 +216,7 @@ class Results:
             "Dataset",
             "Model",
             "nr_topics",
+            "cv",
             "npmi",
             "diversity",
             "params",
@@ -244,6 +247,7 @@ class Results:
                 computation_time = row["Computation Time"]
 
                 # Extract scores
+                cv = row["Scores"]["cv"]
                 npmi = row["Scores"]["npmi"]
                 diversity = row["Scores"]["diversity"]
 
@@ -262,6 +266,7 @@ class Results:
                     dataset,
                     model,
                     nr_topics,
+                    cv,
                     npmi,
                     diversity,
                     params,
@@ -270,7 +275,7 @@ class Results:
                 ]
 
         # Making sure they have the correct type
-        for column in ["npmi", "diversity"]:
+        for column in ["cv", "npmi", "diversity"]:
             results[column] = results[column].astype(float)
 
         self.basic_results[dataset] = results

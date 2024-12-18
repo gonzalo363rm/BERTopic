@@ -504,13 +504,15 @@ class Trainer:
 
     def get_metrics(self):
         """Prepare evaluation measures using OCTIS"""
+        cv = Coherence(texts=self.data.get_corpus(), topk=self.topk, measure="c_v")
         npmi = Coherence(texts=self.data.get_corpus(), topk=self.topk, measure="c_npmi")
         topic_diversity = TopicDiversity(topk=self.topk)
 
         # Define methods
-        coherence = [(npmi, "npmi")]
+        coherence_cv = [(cv, "cv")]
+        coherence_npmi = [(npmi, "npmi")]
         diversity = [(topic_diversity, "diversity")]
-        metrics = [(coherence, "Coherence"), (diversity, "Diversity")]
+        metrics = [(coherence_cv, "Coherence:c_v"), (coherence_npmi, "Coherence:npmi"), (diversity, "Diversity")]
 
         return metrics
 

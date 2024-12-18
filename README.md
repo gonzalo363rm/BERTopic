@@ -13,9 +13,9 @@ BERTopic_tweets_municipalidad preprocesada da resultados muy similares respecto 
 
 <!-- DOCKER -->
 <!-- Build -->
-docker build -t bertopic_v2 .
+docker build -t bertopic .
 <!-- Run and replicate changes -->
-docker run -v C:\Users\gonza\Desktop\J\wFacu\Tesina\Modelos\Validaciones\BERTopic_evaluation:/app bertopic_v2
+docker run -v C:\Users\gonza\Desktop\J\wFacu\Tesina\Modelos\BERTopic:/app bertopic
 <!-- TODO: spanish_nlp (que usamos solo para el preprocesamiento) actualiza las versiones de algunos de los package que usamos, deberiamos o usar otra version que no lo haga o quizas mas facil, hacer el preprocesamiento aparte -->
 <!-- TODO: Ver que la carpeta trump y trump.txt se generen dentro de datasets -->
 

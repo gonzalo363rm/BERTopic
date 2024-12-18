@@ -2,6 +2,7 @@ import re
 import nltk
 import string
 import pandas as pd
+import os
 
 from typing import List, Tuple, Union
 from octis.dataset.dataset import Dataset
@@ -63,14 +64,16 @@ class DataLoader:
         """
         if docs is not None:
             return self.docs, None
+        
+        dataset_name = os.path.basename(self.dataset) 
 
-        if self.dataset == "trump":
+        if "trump" in dataset_name:
             self.docs, self.timestamps = self._trump()
-        elif self.dataset == "trump_dtm":
+        elif "trump_dtm" in dataset_name:
             self.docs, self.timestamps = self._trump_dtm()
-        elif self.dataset == "un_dtm":
+        elif "un_dtm" in dataset_name:
             self.docs, self.timestamps = self._un_dtm()
-        elif self.dataset == "20news":
+        elif "20news" in dataset_name:
             self.docs, self.timestamps = self._20news()
 
         if save:
@@ -246,6 +249,7 @@ class DataLoader:
     def _save(self, docs: List[str], save: str):
         """Save the documents"""
         with open(save, mode="wt", encoding="utf-8") as myfile:
-            myfile.write("\n".join(docs))
-
+            # Normaliza los documentos a cadenas antes de guardarlos
+            myfile.write("\n".join([" ".join(doc) if isinstance(doc, list) else doc for doc in docs]))
+        
         self.doc_path = save

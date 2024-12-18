@@ -5,6 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
+.vscode/
 
 # Distribution / packaging
 .Python
@@ -81,3 +82,13 @@ venv.bak/
 stanza_resources/
 ./stanza_resources/
 /stanza_resources/
+
+# Files generated during model execution
+own/datasets/
+# I add them one by one because if the files aren't present, it fails when trying to run
+own/results/Basic/20NewsGroup/*
+own/results/Basic/BBC_News/*
+own/results/Basic/Trump/*
+own/results/Basic/tweets_municipalidad/*
+own/results/Basic/tweets_municipalidad_short/*
+own/results/Basic/tweets_municipalidad_STANZA/*
