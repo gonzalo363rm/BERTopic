@@ -65,7 +65,7 @@ class DataLoader:
         if docs is not None:
             return self.docs, None
         
-        dataset_name = os.path.basename(self.dataset) 
+        dataset_name = os.path.basename(self.dataset) # NOTA 1: Esto de aqui se hizo para que Trump se pueda guardar en un directorio especifico (no en la raiz)
 
         if "trump" in dataset_name:
             self.docs, self.timestamps = self._trump()
@@ -249,7 +249,7 @@ class DataLoader:
     def _save(self, docs: List[str], save: str):
         """Save the documents"""
         with open(save, mode="wt", encoding="utf-8") as myfile:
-            # Normaliza los documentos a cadenas antes de guardarlos
+            # Normaliza los documentos a cadenas antes de guardarlos por el mismo problema de NOTA 1
             myfile.write("\n".join([" ".join(doc) if isinstance(doc, list) else doc for doc in docs]))
         
         self.doc_path = save

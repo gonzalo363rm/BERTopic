@@ -6,7 +6,8 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as tck
 from typing import Mapping, List
 
-
+# Se agrego la metrica c_v: si los archivos JSON utilizados como inputs no tienen la columna "cv", se va a obtener un error
+# Funciones como las graficas de tablas (ej: visualize_table_tq), no fueron probadas, asi que es muy probable que fallen por el mismo motivo
 class Results:
     def __init__(self, main_folder: str, combine_models: bool = False) -> None:
         self.main_folder = main_folder
@@ -53,7 +54,7 @@ class Results:
                     (dataset, method): "{:.3f}"
                     for dataset in datasets
                     for method in [
-                        "cv"
+                        "cv",
                         "npmi",
                         "diversity",
                     ]
@@ -149,6 +150,7 @@ class Results:
                     .loc[
                         :,
                         [
+                            "cv",
                             "npmi",
                             "diversity",
                         ],
@@ -247,6 +249,7 @@ class Results:
                 computation_time = row["Computation Time"]
 
                 # Extract scores
+                print(row)
                 cv = row["Scores"]["cv"]
                 npmi = row["Scores"]["npmi"]
                 diversity = row["Scores"]["diversity"]
@@ -289,6 +292,7 @@ class Results:
             "Model",
             "time_slice",
             "nr_topics",
+            "cv",
             "npmi",
             "diversity",
             "params",
@@ -313,6 +317,7 @@ class Results:
                     computation_time = row["Computation Time"]
 
                     # Extract scores
+                    cv = score["cv"]
                     npmi = score["npmi"]
                     diversity = score["diversity"]
 
@@ -332,6 +337,7 @@ class Results:
                         model,
                         time_slice,
                         nr_topics,
+                        cv,
                         npmi,
                         diversity,
                         params,
@@ -339,7 +345,7 @@ class Results:
                         computation_time,
                     ]
 
-        for column in ["npmi", "diversity"]:
+        for column in ["cv", "npmi", "diversity"]:
             results[column] = results[column].astype(float)
 
         self.dtm_results[dataset] = results
