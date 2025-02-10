@@ -173,12 +173,13 @@ class Trainer:
                 "Params": params_to_use,
                 "Scores": scores,
                 "Computation Time": computation_time,
+                "Topics": output['topics']
             }
             results.append(result)
 
         if save:
-            with open(f"{save}.json", "w") as f:
-                json.dump(results, f)
+            with open(f"{save}.json", "w", encoding="utf-8") as f:
+                json.dump(results, f, ensure_ascii=False)
 
             try:
                 from google.colab import files
