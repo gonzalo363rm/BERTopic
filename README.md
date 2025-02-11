@@ -23,3 +23,25 @@ docker run -v C:\Users\gonza\Desktop\J\wFacu\Tesina\Modelos\BERTopic:/app bertop
 
 Para el filtro de palabras, podriamos considerar que si una palabra de "palabras_no_encontradas" aparece más de n veces, esta bien escrita pero no esta en el diccionario, entonces deberiamos agregarla al mismo
 Ver de usar este package: https://pypi.org/project/pyspellchecker/
+
+# LDA
+
+## Para correr
+    > cd own/LDA
+    > python validate_models.py
+
+## Para las validaciones 
+1. Resultados de los autores de BERTopic
+    - 20 NewsGroups: 
+        - **TC = .058**
+        - **TD = .749**
+    - BBC News: 
+        - **TC = .014**
+        - **TD = .577**
+    - Trump: 
+        - **TC = .011**
+        - **TD = .502**
+>[!NOTE] Ranging from 10 to 50 topics with steps of 10, topic coherence (TC) and topic diversity (TD) were calculated at each step for each topic model. All results were averaged across 3 runs for each step. Thus, each score is the average of 15 separate runs.
+
+## TODO
+- [ ] validar con [https://arxiv.org/pdf/2203.05794]
