@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as tck
 from typing import Mapping, List
 
-# Se agrego la metrica c_v: si los archivos JSON utilizados como inputs no tienen la columna "cv", se va a obtener un error
-# Funciones como las graficas de tablas (ej: visualize_table_tq), no fueron probadas, asi que es muy probable que fallen por el mismo motivo
 class Results:
     def __init__(self, main_folder: str, combine_models: bool = False) -> None:
         self.main_folder = main_folder
@@ -249,8 +247,7 @@ class Results:
                 computation_time = row["Computation Time"]
 
                 # Extract scores
-                print(row)
-                cv = row["Scores"]["cv"]
+                cv = row["Scores"].get("cv", np.nan)  # Verifica si "cv" está presente
                 npmi = row["Scores"]["npmi"]
                 diversity = row["Scores"]["diversity"]
 
@@ -317,7 +314,7 @@ class Results:
                     computation_time = row["Computation Time"]
 
                     # Extract scores
-                    cv = score["cv"]
+                    cv = score.get("cv", np.nan)  # Verifica si "cv" está presente
                     npmi = score["npmi"]
                     diversity = score["diversity"]
 

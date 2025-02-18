@@ -3,43 +3,43 @@ from sentence_transformers import SentenceTransformer
 
 # #=========================================
 # #
-# # LDA__20NEWSGROUP
+# # NMF__20NEWSGROUP
 # #
 # #=========================================
 
 # Prepare data
-dataset, custom = "20NewsGroup", False
-for i, random_state in enumerate([0, 21, 42]):
-    params = {"num_topics": [(i+1)*10 for i in range(5)], "random_state": random_state}
+# dataset, custom = "20NewsGroup", False
+# for i, random_state in enumerate([0, 21, 42]):
+#     params = {"num_topics": [(i+1)*10 for i in range(5)], "random_state": random_state}
 
-    trainer = Trainer(dataset=dataset,
-                      model_name="LDA",
-                      params=params,
-                      custom_dataset=custom,
-                      verbose=True)
-    results = trainer.train(save=f"/app/own/models/LDA/results/Basic/20NewsGroup/lda_{i+1}")
+#     trainer = Trainer(dataset=dataset,
+#                       model_name="NMF",
+#                       params=params,
+#                       custom_dataset=custom,
+#                       verbose=True)
+#     results = trainer.train(save=f"/app/own/models/NMF/results/Basic/20NewsGroup/nmf_{i+1}")
 
 # #=========================================
 # #
-# # LDA__BBC_news
+# # NMF__BBC_news
 # #
 # #=========================================
 
 # Prepare data
-dataset, custom = "BBC_News", False
-for i, random_state in enumerate([0, 21, 42]):
-    params = {"num_topics": [(i+1)*10 for i in range(5)], "random_state": random_state}
+# dataset, custom = "BBC_News", False
+# for i, random_state in enumerate([0, 21, 42]):
+#     params = {"num_topics": [(i+1)*10 for i in range(5)], "random_state": random_state}
 
-    trainer = Trainer(dataset=dataset,
-                      model_name="LDA",
-                      params=params,
-                      custom_dataset=custom,
-                      verbose=True)
-    results = trainer.train(save=f"/app/own/models/LDA/results/Basic/BBC_News/lda_{i+1}")
+#     trainer = Trainer(dataset=dataset,
+#                       model_name="NMF",
+#                       params=params,
+#                       custom_dataset=custom,
+#                       verbose=True)
+#     results = trainer.train(save=f"/app/own/models/NMF/results/Basic/BBC_News/nmf_{i+1}")
 
 # #=========================================
 # #
-# # LDA__trump
+# # NMF__trump
 # #
 # #=========================================
 
@@ -52,15 +52,15 @@ for i, random_state in enumerate([0, 21, 42]):
     params = {"num_topics": [(i+1)*10 for i in range(5)], "random_state": random_state}
 
     trainer = Trainer(dataset=dataset,
-                      model_name="LDA",
+                      model_name="NMF",
                       params=params,
                       custom_dataset=custom,
                       verbose=True)
-    results = trainer.train(save=f"/app/own/models/LDA/results/Basic/Trump/lda_{i+1}")
+    results = trainer.train(save=f"/app/own/models/NMF/results/Basic/Trump/nmf_{i+1}")
 
 # =========================================
 # 
-# LDA_tweets_municipalidad
+# NMF_tweets_municipalidad
 # 
 # =========================================
 
@@ -86,8 +86,8 @@ embeddings = model.encode(data, show_progress_bar=True)
 for i, random_state in enumerate([0, 21, 42]):
     params = {"num_topics": [(i+1)*10 for i in range(5)], "random_state": random_state}
     trainer = Trainer(dataset=dataset,
-                      model_name="LDA",
+                      model_name="NMF",
                       params=params,
                       custom_dataset=custom,
                       verbose=True)
-    results = trainer.train(save=f"/app/own/models/LDA/results/Basic/tweets_municipalidad/lda_{i+1}")
+    results = trainer.train(save=f"/app/own/models/NMF/results/Basic/tweets_municipalidad/nmf_{i+1}")
