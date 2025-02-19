@@ -43,6 +43,13 @@
     - **TC = -.011**
     - **TD = .502**
 
+## Resultados tweets_municipalidad
+| Métrica       | Valor    |
+|---------------|----------|
+| **cv**        | 0.355899 |
+| **npmi**      |-0.037047 |
+| **diversity** | 0.899455 |
+
 ## TODO
 - [x] validar con [BERTopic: Neural topic modeling with a class-based TF-IDF procedure](https://arxiv.org/pdf/2203.05794).
     >[!NOTE]
@@ -64,6 +71,13 @@
 - Trump: 
     - **TC = .009**
     - **TD = .379**
+
+## Resultados tweets_municipalidad
+| Métrica       | Valor    |
+|---------------|----------|
+| **cv**        | 0.453074 |
+| **npmi**      | 0.050831 |
+| **diversity** | 0.581711 |
 
 # General
 > [!IMPORTANT]
