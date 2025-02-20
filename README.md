@@ -111,7 +111,7 @@
 - [x] Correr todos los modelos con los dataset que usaron los autores.
 - [x] Validar todos los modelos.
 - [x] Correr todos los modelos con el dataset "tweets_municipalidad".
-- [ ] Correr todos los modelos con el dataset "senadores".
+- [x] Correr todos los modelos con el dataset "senadores".
 - [ ] Corregir funciones de graficas (ver notas importantes ^).
 - [ ] Intentar mejorar los parametros con cv.
 - [ ] Acordarse de mover el item de abajo cuando hagamos el README de `Preprocess`.
