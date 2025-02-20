@@ -7,32 +7,32 @@ from sentence_transformers import SentenceTransformer
 #
 #=========================================
 
-# Prepare data
-dataset, custom = "20NewsGroup", False
-data_loader = DataLoader(dataset)
-_, timestamps = data_loader.load_docs()
-data = data_loader.load_octis(custom)
-data = [" ".join(words) for words in data.get_corpus()]
+# # Prepare data
+# dataset, custom = "20NewsGroup", False
+# data_loader = DataLoader(dataset)
+# _, timestamps = data_loader.load_docs()
+# data = data_loader.load_octis(custom)
+# data = [" ".join(words) for words in data.get_corpus()]
 
-# Extract embeddings
-model = SentenceTransformer("all-mpnet-base-v2")
-embeddings = model.encode(data, show_progress_bar=True)
+# # Extract embeddings
+# model = SentenceTransformer("all-mpnet-base-v2")
+# embeddings = model.encode(data, show_progress_bar=True)
 
-params = {
-        "embedding_model": "all-mpnet-base-v2",
-        "nr_topics": [(i+1)*10 for i in range(5)],
-        "min_topic_size": 15,
-        "verbose": True
-    }
+# params = {
+#         "embedding_model": "all-mpnet-base-v2",
+#         "nr_topics": [(i+1)*10 for i in range(5)],
+#         "min_topic_size": 15,
+#         "verbose": True
+#     }
 
-for i in range(3):
-    trainer = Trainer(dataset=dataset,
-                    model_name="BERTopic",
-                    params=params,
-                    bt_embeddings=embeddings,
-                    custom_dataset=custom,
-                    verbose=True)
-    results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/20NewsGroup/bertopic_{i+1}")
+# for i in range(3):
+#     trainer = Trainer(dataset=dataset,
+#                     model_name="BERTopic",
+#                     params=params,
+#                     bt_embeddings=embeddings,
+#                     custom_dataset=custom,
+#                     verbose=True)
+#     results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/20NewsGroup/bertopic_{i+1}")
 
 # #=========================================
 # #
@@ -40,32 +40,32 @@ for i in range(3):
 # #
 # #=========================================
 
-# Prepare data
-dataset, custom = "BBC_News", False
-data_loader = DataLoader(dataset)
-_, timestamps = data_loader.load_docs()
-data = data_loader.load_octis(custom)
-data = [" ".join(words) for words in data.get_corpus()]
+# # Prepare data
+# dataset, custom = "BBC_News", False
+# data_loader = DataLoader(dataset)
+# _, timestamps = data_loader.load_docs()
+# data = data_loader.load_octis(custom)
+# data = [" ".join(words) for words in data.get_corpus()]
 
-# Extract embeddings
-model = SentenceTransformer("all-mpnet-base-v2")
-embeddings = model.encode(data, show_progress_bar=True)
+# # Extract embeddings
+# model = SentenceTransformer("all-mpnet-base-v2")
+# embeddings = model.encode(data, show_progress_bar=True)
 
-params = {
-        "embedding_model": "all-mpnet-base-v2",
-        "nr_topics": [(i+1)*10 for i in range(5)],
-        # "min_topic_size": 15, Segun el autor para este data set no va
-        "verbose": True
-    }
+# params = {
+#         "embedding_model": "all-mpnet-base-v2",
+#         "nr_topics": [(i+1)*10 for i in range(5)],
+#         # "min_topic_size": 15, Segun el autor para este data set no va
+#         "verbose": True
+#     }
 
-for i in range(3):
-    trainer = Trainer(dataset=dataset,
-                    model_name="BERTopic",
-                    params=params,
-                    bt_embeddings=embeddings,
-                    custom_dataset=custom,
-                    verbose=True)
-    results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/BBC_News/bertopic_{i+1}")
+# for i in range(3):
+#     trainer = Trainer(dataset=dataset,
+#                     model_name="BERTopic",
+#                     params=params,
+#                     bt_embeddings=embeddings,
+#                     custom_dataset=custom,
+#                     verbose=True)
+#     results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/BBC_News/bertopic_{i+1}")
 
 # #=========================================
 # #
@@ -73,36 +73,36 @@ for i in range(3):
 # #
 # #=========================================
 
-# Prepare the documents and save them in an OCTIS-based format
-dataset, custom = "../../datasets/trump", True
-# Si no esta descargado el dataset de trump, descomentar la siguiente linea:
-# dataloader = DataLoader(dataset).prepare_docs(save="../../datasets/trump.txt").preprocess_octis(output_folder="../../datasets/trump")
+# # Prepare the documents and save them in an OCTIS-based format
+# dataset, custom = "../../datasets/trump", True
+# # Si no esta descargado el dataset de trump, descomentar la siguiente linea:
+# # dataloader = DataLoader(dataset).prepare_docs(save="../../datasets/trump.txt").preprocess_octis(output_folder="../../datasets/trump")
 
-# Prepare data
-data_loader = DataLoader(dataset)
-_, timestamps = data_loader.load_docs()
-data = data_loader.load_octis(custom)
-data = [" ".join(words) for words in data.get_corpus()]
+# # Prepare data
+# data_loader = DataLoader(dataset)
+# _, timestamps = data_loader.load_docs()
+# data = data_loader.load_octis(custom)
+# data = [" ".join(words) for words in data.get_corpus()]
 
-# Extract embeddings
-model = SentenceTransformer("all-mpnet-base-v2")
-embeddings = model.encode(data, show_progress_bar=True)
+# # Extract embeddings
+# model = SentenceTransformer("all-mpnet-base-v2")
+# embeddings = model.encode(data, show_progress_bar=True)
 
-params = {
-        "embedding_model": "all-mpnet-base-v2",
-        "nr_topics": [(i+1)*10 for i in range(5)],
-        "min_topic_size": 15,
-        "verbose": True
-    }
+# params = {
+#         "embedding_model": "all-mpnet-base-v2",
+#         "nr_topics": [(i+1)*10 for i in range(5)],
+#         "min_topic_size": 15,
+#         "verbose": True
+#     }
 
-for i in range(3):
-    trainer = Trainer(dataset=dataset,
-                    model_name="BERTopic",
-                    params=params,
-                    bt_embeddings=embeddings,
-                    custom_dataset=custom,
-                    verbose=True)
-    results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/Trump/bertopic_{i+1}")
+# for i in range(3):
+#     trainer = Trainer(dataset=dataset,
+#                     model_name="BERTopic",
+#                     params=params,
+#                     bt_embeddings=embeddings,
+#                     custom_dataset=custom,
+#                     verbose=True)
+#     results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/Trump/bertopic_{i+1}")
 
 # =========================================
 # 
@@ -147,40 +147,40 @@ for i in range(3):
 
 #=========================================
 #
-# BERTopic_senadores with preprocess
+# BERTopic_senadores
 #
 #=========================================
 
 # Abre el archivo en modo de lectura
-# with open('/app/own/datasets/senadores_preprocessed.txt', 'r', encoding='utf-8') as file:
-#     # Lee las líneas
-#     senadores_preprocessed = file.readlines()
+with open('/app/own/datasets/senadores.txt', 'r', encoding='utf-8') as file:
+    # Lee las líneas
+    senadores = file.readlines()
 
-# # Prepare the documents and save them in an OCTIS-based format
-# dataset, custom = "/app/own/datasets/senadores_preprocessed", True
-# dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/senadores_preprocessed.txt", docs=senadores_preprocessed)
-# dataloader.preprocess_octis(output_folder="/app/own/datasets/senadores_preprocessed", documents_path="/app/own/datasets/senadores_preprocessed.txt")
+# Prepare the documents and save them in an OCTIS-based format
+dataset, custom = "/app/own/datasets/senadores", True
+dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/senadores.txt", docs=senadores)
+dataloader.preprocess_octis(output_folder="/app/own/datasets/senadores", documents_path="/app/own/datasets/senadores.txt")
 
-# # Prepare data
-# data = dataloader.load_octis(custom)
-# data = [" ".join(words) for words in data.get_corpus()]
+# Prepare data
+data = dataloader.load_octis(custom)
+data = [" ".join(words) for words in data.get_corpus()]
 
-# # Extract embeddings
-# model = SentenceTransformer("all-mpnet-base-v2")
-# embeddings = model.encode(data, show_progress_bar=True)
+# Extract embeddings
+model = SentenceTransformer("all-mpnet-base-v2")
+embeddings = model.encode(data, show_progress_bar=True)
 
-# params = {
-#         "embedding_model": "all-mpnet-base-v2",
-#         "nr_topics": [(i+1)*5 for i in range(10)],
-#         "min_topic_size": 15,
-#         "verbose": True
-#     }
+params = {
+        "embedding_model": "all-mpnet-base-v2",
+        "nr_topics": [(i+1)*5 for i in range(10)],
+        "min_topic_size": 15,
+        "verbose": True
+    }
 
-# for i in range(3):
-#     trainer = Trainer(dataset=dataset,
-#                     model_name="BERTopic",
-#                     params=params,
-#                     bt_embeddings=embeddings,
-#                     custom_dataset=custom,
-#                     verbose=True)
-#     results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/senadores_preprocessed/bertopic_{i+1}")
+for i in range(3):
+    trainer = Trainer(dataset=dataset,
+                    model_name="BERTopic",
+                    params=params,
+                    bt_embeddings=embeddings,
+                    custom_dataset=custom,
+                    verbose=True)
+    results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/senadores/bertopic_{i+1}")

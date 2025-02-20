@@ -29,3 +29,6 @@ print(results2.get_data("../../datasets/trump", aggregated=True))
 
 print("##########\nDATASET TWEETS MUNICIPALIDAD\n##########")
 print(results2.get_data("/app/own/datasets/tweets_municipalidad", aggregated=True))
+
+print("##########\nDATASET SENADORES\n##########")
+print(results2.get_data("/app/own/datasets/senadores", aggregated=True))

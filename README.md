@@ -26,6 +26,13 @@
 | **npmi**      | 0.058348 |
 | **diversity** | 0.800105 |
 
+## Resultados senadores
+| Métrica       | Valor    |
+|---------------|----------|
+| **cv**        | 0.535749 |
+| **npmi**      | 0.193836 |
+| **diversity** | 0.637442 |
+
 # LDA
 ### Para correr
 1. cd own/models/LDA
@@ -49,6 +56,13 @@
 | **cv**        | 0.355899 |
 | **npmi**      |-0.037047 |
 | **diversity** | 0.899455 |
+
+## Resultados senadores
+| Métrica       | Valor    |
+|---------------|----------|
+| **cv**        | 0.398367 |
+| **npmi**      | 0.014036 |
+| **diversity** | 0.247566 |
 
 ## TODO
 - [x] validar con [BERTopic: Neural topic modeling with a class-based TF-IDF procedure](https://arxiv.org/pdf/2203.05794).
@@ -79,6 +93,13 @@
 | **npmi**      | 0.050831 |
 | **diversity** | 0.581711 |
 
+## Resultados senadores
+| Métrica       | Valor    |
+|---------------|----------|
+| **cv**        | 0.487169 |
+| **npmi**      | 0.032270 |
+| **diversity** | 0.492323 |
+
 # General
 > [!IMPORTANT]
 > El autor, para medir la coherencia, utilizo `npmi`
@@ -89,7 +110,7 @@
 ## TODO
 - [x] Correr todos los modelos con los dataset que usaron los autores.
 - [x] Validar todos los modelos.
-- [ ] Correr todos los modelos con el dataset "tweets_municipalidad".
+- [x] Correr todos los modelos con el dataset "tweets_municipalidad".
 - [ ] Correr todos los modelos con el dataset "senadores".
 - [ ] Corregir funciones de graficas (ver notas importantes ^).
 - [ ] Intentar mejorar los parametros con cv.
