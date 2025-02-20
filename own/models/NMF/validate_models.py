@@ -84,7 +84,7 @@ model = SentenceTransformer("all-mpnet-base-v2")
 embeddings = model.encode(data, show_progress_bar=True)
 
 for i, random_state in enumerate([0, 21, 42]):
-    params = {"num_topics": [(i+1)*10 for i in range(5)], "random_state": random_state}
+    params = {"num_topics": [(i+1)*5 for i in range(10)], "random_state": random_state}
     trainer = Trainer(dataset=dataset,
                       model_name="NMF",
                       params=params,

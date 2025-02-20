@@ -84,6 +84,7 @@
 > El autor, para medir la coherencia, utilizo `npmi`
 > Los archivos encontrados en `evaluation/results.py` y `evaluation/evaluation.py` del autor, fueron modificados para trabajar con metrica c_v. Por lo que, si los archivos JSONs no tienen dicha metrica, `results` devolvera "NaN" en la columna correspondiente.
 > Funciones como las graficas de tablas, encontradas en `evaluation/results.py` (ej: visualize_table_tq), no fueron probadas, siendo probable que fallen por el cambio a las metricas.
+> Para validar el modelo, el número de topicos se iteró como dice el autor (`"num_topics": [(i+1)*10 for i in range(5)]`). Sin embargo, por fines practicos, se aumentó el rango de topicos (`"num_topics": [(i+1)*5 for i in range(10)]`). Es decir, de la primera forma el numero de topicos es de: [10, 20, 30, 40, 50] y de la segunda: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50]
 
 ## TODO
 - [x] Correr todos los modelos con los dataset que usaron los autores.
