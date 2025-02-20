@@ -53,9 +53,9 @@
 ## Resultados tweets_municipalidad
 | Métrica       | Valor    |
 |---------------|----------|
-| **cv**        | 0.355899 |
-| **npmi**      |-0.037047 |
-| **diversity** | 0.899455 |
+| **cv**        | 0.364842 |
+| **npmi**      |-0.029664 |
+| **diversity** | 0.897936 |
 
 ## Resultados senadores
 | Métrica       | Valor    |
@@ -89,9 +89,9 @@
 ## Resultados tweets_municipalidad
 | Métrica       | Valor    |
 |---------------|----------|
-| **cv**        | 0.453074 |
-| **npmi**      | 0.050831 |
-| **diversity** | 0.581711 |
+| **cv**        | 0.454306 |
+| **npmi**      | 0.051452 |
+| **diversity** | 0.595551 |
 
 ## Resultados senadores
 | Métrica       | Valor    |
