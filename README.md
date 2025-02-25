@@ -57,6 +57,14 @@
 | **npmi**      |-0.029664 |
 | **diversity** | 0.897936 |
 
+##  Resultados de tweets_municipalidad tras aplicar el optimizador de octis (npmi) para alpha y eta
+### "alpha": 4.38393917610078, "eta": 4.9725466249069346
+| Métrica       | Valor    |
+|---------------|----------|
+| **cv**        | 0.360588 |
+| **npmi**      |-0.011460 |
+| **diversity** | 0.497913 |
+
 ## Resultados senadores
 | Métrica       | Valor    |
 |---------------|----------|
@@ -114,8 +122,6 @@
 - [x] Correr todos los modelos con el dataset "senadores".
 - [ ] Corregir funciones de graficas (ver notas importantes ^).
 - [ ] Intentar mejorar los parametros con cv.
-- [ ] Acordarse de mover el item de abajo cuando hagamos el README de `Preprocess`.
-- [ ] Justificar porque usamos spanish_nlp (preprocesamiento).
 
 > [!NOTE]
 > BERTopic_tweets_municipalidad preprocesada da mejores resultados en npmi y diversity que la version short, tambien preprocesada
