@@ -76,7 +76,7 @@ dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/tweets_mun
 # dataloader.preprocess_octis(output_folder="/app/own/datasets/tweets_municipalidad", documents_path="/app/own/datasets/tweets_municipalidad.txt")
 
 for i, random_state in enumerate([0, 21, 42]):
-    params = {"num_topics": [(i+1)*5 for i in range(10)], "random_state": random_state}
+    # params = {"num_topics": [(i+1)*5 for i in range(10)], "random_state": random_state}
     params = {"num_topics": [(i+1)*5 for i in range(10)], "random_state": random_state, "alpha": 4.38393917610078, "eta": 4.9725466249069346} # Parametros optimizados
     trainer = Trainer(dataset=dataset,
                       model_name="LDA",
