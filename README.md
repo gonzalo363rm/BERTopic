@@ -1,5 +1,5 @@
 # DOCKER
-1. build: `docker build -t bertopic .`
+1. build: `docker build -t bertopic .`, agregando `--platform linux/amd64` para Apple Silicon.
 2. para que se repliquen los cambios: `docker run -v C:\Users\gonza\Desktop\J\wFacu\Tesina\Modelos\BERTopic:/app bertopic`
 
 # BERTopic

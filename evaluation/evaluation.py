@@ -3,6 +3,7 @@ import time
 import itertools
 import numpy as np
 import pandas as pd
+from datetime import datetime
 
 from sklearn.feature_extraction.text import CountVectorizer
 from typing import Mapping, Any, List, Tuple
@@ -193,6 +194,7 @@ class Trainer:
     def _train_tm_model(
         self, params: Mapping[str, Any]
     ) -> Tuple[Mapping[str, Any], float]:
+        print(self.params)
         """Select and train the Topic Model"""
         # Train custom CTM
         if self.model_name == "CTM_CUSTOM":
@@ -410,6 +412,10 @@ class Trainer:
         start = time.time()
         topics, _ = model.fit_transform(data, self.embeddings)
 
+        # Guardar el modelo para uso futuro
+        # model.save("bertopic_model_tweets_municipalidad")
+
+
         # Dynamic Topic Modeling
         if self.timestamps:
             topics_over_time = model.topics_over_time(
@@ -461,6 +467,12 @@ class Trainer:
             ]
 
             output_tm = {"topics": bertopic_topics}
+
+        # Visualizar los temas
+        fig = model.visualize_topics()
+
+        # Guardar el gráfico como un archivo HTML
+        fig.write_html("../../graphs/bertopic_tweets_municipalidad_distance_" + datetime.now().time().isoformat() + "_nrtopics" + str(params["nr_topics"]) + ".html")
 
         return output_tm, computation_time
 
