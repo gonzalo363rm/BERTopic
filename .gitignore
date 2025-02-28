@@ -92,3 +92,5 @@ own/results/Basic/Trump/*
 own/results/Basic/tweets_municipalidad/*
 own/results/Basic/tweets_municipalidad_short/*
 own/results/Basic/tweets_municipalidad_STANZA/*
+# Trained models
+own/models/BERTopic/trained_models/*

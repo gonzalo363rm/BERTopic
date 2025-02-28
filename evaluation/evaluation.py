@@ -1,3 +1,4 @@
+import os
 import json
 import time
 import itertools
@@ -395,6 +396,26 @@ class Trainer:
         end = time.time()
         computation_time = end - start
         return output_tm, computation_time
+    
+    def params_to_string(self, params: Mapping[str, any]) -> str:
+        """
+        Convierte un diccionario de parámetros en una cadena legible para nombres de archivos.
+        
+        Args:
+            params (Mapping[str, any]): Diccionario de parámetros.
+        
+        Returns:
+            str: Cadena que representa los parámetros.
+        """
+        param_list = []
+        for key, value in params.items():
+            # Convierte cada clave-valor en una cadena
+            param_str = f"{key}_{value}"
+            # Reemplaza espacios y otros caracteres no válidos
+            param_str = param_str.replace(" ", "_").replace("/", "_").replace("\\", "_")
+            param_list.append(param_str)
+        # Une todos los parámetros con guiones bajos
+        return "_".join(param_list)
 
     def _train_bertopic(
         self, params: Mapping[str, any]
@@ -412,9 +433,17 @@ class Trainer:
         start = time.time()
         topics, _ = model.fit_transform(data, self.embeddings)
 
-        # Guardar el modelo para uso futuro
-        # model.save("bertopic_model_tweets_municipalidad")
+        # # Generar un nombre de archivo válido
+        # dataset_name = self.dataset.replace(" ", "_").replace("/", "_").replace("\\", "_")
+        # params_str = self.params_to_string(params)
+        # timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # Formato: AAAAmmdd_HHMMSS
 
+        # # Crear el directorio si no existe
+        # os.makedirs(f"trained_models", exist_ok=True)
+        # save_path = f"trained_models/{self.model_name}__{dataset_name}__{params_str}__{timestamp}"
+
+        # # Guardar el modelo para uso futuro
+        # model.save(save_path)
 
         # Dynamic Topic Modeling
         if self.timestamps:
@@ -467,12 +496,6 @@ class Trainer:
             ]
 
             output_tm = {"topics": bertopic_topics}
-
-        # Visualizar los temas
-        fig = model.visualize_topics()
-
-        # Guardar el gráfico como un archivo HTML
-        fig.write_html("../../graphs/bertopic_tweets_municipalidad_distance_" + datetime.now().time().isoformat() + "_nrtopics" + str(params["nr_topics"]) + ".html")
 
         return output_tm, computation_time
 
