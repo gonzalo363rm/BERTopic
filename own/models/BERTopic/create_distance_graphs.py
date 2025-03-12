@@ -1,6 +1,8 @@
 import os
 from bertopic import BERTopic
 
+# NOTA: NO SE USA POR POSIBLE PROBLEMA DE MEMORIA, NO SE GUARDAN LOS MODELOS SINO QUE SE GRAFICA DIRECTAMENTE EN EL ENTRENAMIENTO (evaluation/evaluation.py)
+
 # Ruta al directorio que contiene los modelos entrenados
 models_dir = "/app/own/models/BERTopic/trained_models"
 

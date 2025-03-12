@@ -432,18 +432,31 @@ class Trainer:
 
         start = time.time()
         topics, _ = model.fit_transform(data, self.embeddings)
+        
+        # INICIO DE GRÁFICA DE DISTANCIA, PROPIA DE BERTOPIC
 
-        # # Generar un nombre de archivo válido
-        # dataset_name = self.dataset.replace(" ", "_").replace("/", "_").replace("\\", "_")
-        # params_str = self.params_to_string(params)
-        # timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # Formato: AAAAmmdd_HHMMSS
+        # Generar un nombre de archivo válido
+        dataset_name = self.dataset.replace(" ", "_").replace("/", "_").replace("\\", "_")
+        params_str = self.params_to_string(params)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")  # Formato: AAAAmmdd_HHMMSS
 
-        # # Crear el directorio si no existe
+        # Guardar el modelo para uso futuro
         # os.makedirs(f"trained_models", exist_ok=True)
         # save_path = f"trained_models/{self.model_name}__{dataset_name}__{params_str}__{timestamp}"
-
-        # # Guardar el modelo para uso futuro
         # model.save(save_path)
+        
+        # Generar la gráfica de los temas
+        fig = model.visualize_topics()
+        # fig = loaded_model.visualize_hierarchy()
+
+        # Crear un nombre de archivo para la gráfica (igual al nombre del modelo)
+        os.makedirs(f"../../graphs/distance", exist_ok=True)
+        graph_path = f"../../graphs/distance/{self.model_name}__{dataset_name}__{params_str}__{timestamp}"
+
+        # Guardar la gráfica en un archivo HTML
+        fig.write_html(graph_path)
+
+        # FIN DE GRÁFICA DE DISTANCIA, PROPIA DE BERTOPIC
 
         # Dynamic Topic Modeling
         if self.timestamps:
