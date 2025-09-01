@@ -111,39 +111,39 @@ from sentence_transformers import SentenceTransformer
 # =========================================
 
 # Abre el archivo en modo de lectura
-with open('/app/own/datasets/tweets_municipalidad.txt', 'r', encoding='utf-8') as file:
-    # Lee las líneas
-    tweets_municipalidad = file.readlines()
+# with open('/app/own/datasets/tweets_municipalidad.txt', 'r', encoding='utf-8') as file:
+#     # Lee las líneas
+#     tweets_municipalidad = file.readlines()
 
-# Prepare the documents and save them in an OCTIS-based format
-dataset, custom = "/app/own/datasets/tweets_municipalidad", True
-dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/tweets_municipalidad.txt", docs=tweets_municipalidad)
-# Esto debe correrse al menos una vez para crear la carpeta tweets_municipalidad con los archivos (corpus.tsv, indexes.txt, metadata.json y vocabulary.txt)
-dataloader.preprocess_octis(output_folder="/app/own/datasets/tweets_municipalidad", documents_path="/app/own/datasets/tweets_municipalidad.txt")
+# # Prepare the documents and save them in an OCTIS-based format
+# dataset, custom = "/app/own/datasets/tweets_municipalidad", True
+# dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/tweets_municipalidad.txt", docs=tweets_municipalidad)
+# # Esto debe correrse al menos una vez para crear la carpeta tweets_municipalidad con los archivos (corpus.tsv, indexes.txt, metadata.json y vocabulary.txt)
+# dataloader.preprocess_octis(output_folder="/app/own/datasets/tweets_municipalidad", documents_path="/app/own/datasets/tweets_municipalidad.txt")
 
-# Prepare data
-data = dataloader.load_octis(custom)
-data = [" ".join(words) for words in data.get_corpus()]
+# # Prepare data
+# data = dataloader.load_octis(custom)
+# data = [" ".join(words) for words in data.get_corpus()]
 
-# Extract embeddings
-model = SentenceTransformer("all-mpnet-base-v2")
-embeddings = model.encode(data, show_progress_bar=True)
+# # Extract embeddings
+# model = SentenceTransformer("all-mpnet-base-v2")
+# embeddings = model.encode(data, show_progress_bar=True)
 
-params = {
-        "embedding_model": "all-mpnet-base-v2",
-        "nr_topics": [(i+1)*5 for i in range(10)],
-        "min_topic_size": 15,
-        "verbose": True
-    }
+# params = {
+#         "embedding_model": "all-mpnet-base-v2",
+#         "nr_topics": [(i+1)*5 for i in range(10)],
+#         "min_topic_size": 15,
+#         "verbose": True
+#     }
 
-for i in range(3):
-    trainer = Trainer(dataset=dataset,
-                    model_name="BERTopic",
-                    params=params,
-                    bt_embeddings=embeddings,
-                    custom_dataset=custom,
-                    verbose=True)
-    results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/tweets_municipalidad/bertopic_{i+1}")
+# for i in range(3):
+#     trainer = Trainer(dataset=dataset,
+#                     model_name="BERTopic",
+#                     params=params,
+#                     bt_embeddings=embeddings,
+#                     custom_dataset=custom,
+#                     verbose=True)
+#     results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/tweets_municipalidad/bertopic_{i+1}")
 
 # =========================================
 
@@ -152,14 +152,55 @@ for i in range(3):
 # =========================================
 
 # Abre el archivo en modo de lectura
-with open('/app/own/datasets/senadores.txt', 'r', encoding='utf-8') as file:
+# with open('/app/own/datasets/senadores.txt', 'r', encoding='utf-8') as file:
+#     # Lee las líneas
+#     senadores = file.readlines()
+
+# # Prepare the documents and save them in an OCTIS-based format
+# dataset, custom = "/app/own/datasets/senadores", True
+# dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/senadores.txt", docs=senadores)
+# dataloader.preprocess_octis(output_folder="/app/own/datasets/senadores", documents_path="/app/own/datasets/senadores.txt")
+
+# # Prepare data
+# data = dataloader.load_octis(custom)
+# data = [" ".join(words) for words in data.get_corpus()]
+
+# # Extract embeddings
+# model = SentenceTransformer("all-mpnet-base-v2")
+# embeddings = model.encode(data, show_progress_bar=True)
+
+# params = {
+#         "embedding_model": "all-mpnet-base-v2",
+#         "nr_topics": [(i+1)*5 for i in range(10)],
+#         "min_topic_size": 15,
+#         "verbose": True
+#     }
+
+# for i in range(3):
+#     trainer = Trainer(dataset=dataset,
+#                     model_name="BERTopic",
+#                     params=params,
+#                     bt_embeddings=embeddings,
+#                     custom_dataset=custom,
+#                     verbose=True)
+#     results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/senadores/bertopic_{i+1}")
+
+# =========================================
+# 
+# BERTopic_tweets_preprocessed
+# 
+# =========================================
+
+# Abre el archivo en modo de lectura
+with open('/app/own/datasets/tweets_preprocessed.txt', 'r', encoding='utf-8') as file:
     # Lee las líneas
-    senadores = file.readlines()
+    tweets_preprocessed = file.readlines()
 
 # Prepare the documents and save them in an OCTIS-based format
-dataset, custom = "/app/own/datasets/senadores", True
-dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/senadores.txt", docs=senadores)
-dataloader.preprocess_octis(output_folder="/app/own/datasets/senadores", documents_path="/app/own/datasets/senadores.txt")
+dataset, custom = "/app/own/datasets/tweets_preprocessed", True
+dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/tweets_preprocessed.txt", docs=tweets_preprocessed)
+# Esto debe correrse al menos una vez para crear la carpeta tweets_preprocessed con los archivos (corpus.tsv, indexes.txt, metadata.json y vocabulary.txt)
+dataloader.preprocess_octis(output_folder="/app/own/datasets/tweets_preprocessed", documents_path="/app/own/datasets/tweets_preprocessed.txt")
 
 # Prepare data
 data = dataloader.load_octis(custom)
@@ -183,4 +224,4 @@ for i in range(3):
                     bt_embeddings=embeddings,
                     custom_dataset=custom,
                     verbose=True)
-    results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/senadores/bertopic_{i+1}")
+    results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/tweets_preprocessed/bertopic_{i+1}")
