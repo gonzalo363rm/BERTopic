@@ -22,7 +22,5 @@ RUN pip install bertopic==0.9.4
 # Instalamos la ultima version en la que aun existe la función "append" de pandas
 RUN pip install pandas==1.5.3
 
-RUN pip install octis==1.10.2 scikit-learn
-
 # Establece el comando predeterminado para ejecutar al iniciar el contenedor
 CMD ["tail", "-f", "/dev/null"]

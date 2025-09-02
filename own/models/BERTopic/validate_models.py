@@ -187,28 +187,116 @@ from sentence_transformers import SentenceTransformer
 
 # =========================================
 # 
-# BERTopic_tweets_preprocessed
+# BERTopic_tweets_preprocessed con Dask (optimizado para 8GB RAM)
 # 
 # =========================================
 
-# Abre el archivo en modo de lectura
-with open('/app/own/datasets/tweets_preprocessed.txt', 'r', encoding='utf-8') as file:
-    # Lee las líneas
-    tweets_preprocessed = file.readlines()
+import dask.dataframe as dd
+import gc
+import numpy as np
+
+# Cargar dataset como Dask DataFrame con bloques pequeños
+tweets_ddf = dd.read_csv('/app/own/datasets/tweets_preprocessed_short.txt', 
+                         header=None, 
+                         blocksize='32MB')  # Bloques de 32MB para 8GB RAM
+
+# Convertir a lista de textos por chunks
+def process_chunk(chunk):
+    return chunk[0].tolist()
+
+# Procesar por chunks conservadores para 8GB RAM
+chunk_size = 25000  # 25k tweets por chunk (más conservador)
+chunks = []
+total_tweets = len(tweets_ddf)
+
+print(f"Total de tweets a procesar: {total_tweets:,}")
+print(f"Procesando en chunks de {chunk_size:,} tweets")
+
+# Usar map_partitions para procesar por chunks
+def process_partition(partition):
+    return partition[0].tolist()
+
+# Procesar cada partición de Dask
+partitions = tweets_ddf.map_partitions(process_partition).compute()
+chunks = [part for part in partitions if part]  # Filtrar particiones vacías
+
+print(f"  - Chunks procesados: {len(chunks)} particiones")
+print(f"  - Total de tweets en chunks: {sum(len(chunk) for chunk in chunks):,}")
 
 # Prepare the documents and save them in an OCTIS-based format
-dataset, custom = "/app/own/datasets/tweets_preprocessed", True
-dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/tweets_preprocessed.txt", docs=tweets_preprocessed)
-# Esto debe correrse al menos una vez para crear la carpeta tweets_preprocessed con los archivos (corpus.tsv, indexes.txt, metadata.json y vocabulary.txt)
-dataloader.preprocess_octis(output_folder="/app/own/datasets/tweets_preprocessed", documents_path="/app/own/datasets/tweets_preprocessed.txt")
+dataset, custom = "/app/own/datasets/tweets_preprocessed_short", True
+
+# Usar el primer chunk para preparar la estructura OCTIS
+first_chunk = chunks[0] if chunks else []
+dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/tweets_preprocessed_short.txt", docs=first_chunk)
+# Esto debe correrse al menos una vez para crear la carpeta tweets_preprocessed_short con los archivos (corpus.tsv, indexes.txt, metadata.json y vocabulary.txt)
+dataloader.preprocess_octis(output_folder="/app/own/datasets/tweets_preprocessed_short", documents_path="/app/own/datasets/tweets_preprocessed_short.txt")
 
 # Prepare data
 data = dataloader.load_octis(custom)
 data = [" ".join(words) for words in data.get_corpus()]
 
-# Extract embeddings
+# Procesar embeddings por chunks y guardar en disco (optimizado para 8GB RAM)
 model = SentenceTransformer("all-mpnet-base-v2")
-embeddings = model.encode(data, show_progress_bar=True)
+embedding_files = []
+
+print("\nProcesando embeddings por chunks y guardando en disco...")
+
+for i, chunk_texts in enumerate(chunks):
+    print(f"Embeddings chunk {i+1}/{len(chunks)} ({len(chunk_texts):,} tweets)")
+    
+    # Procesar embeddings del chunk con batch size muy pequeño para 8GB RAM
+    chunk_embeddings = model.encode(chunk_texts, 
+                                   show_progress_bar=True,
+                                   batch_size=8,  # Batch muy pequeño para 8GB RAM
+                                   device='cpu')    # Usar CPU para evitar problemas de memoria GPU
+    
+    # Guardar embeddings del chunk en disco
+    embedding_file = f"/tmp/embeddings_chunk_{i}.npy"
+    np.save(embedding_file, chunk_embeddings)
+    embedding_files.append(embedding_file)
+    
+    # Limpiar memoria inmediatamente
+    del chunk_texts, chunk_embeddings
+    gc.collect()
+    
+    print(f"  - Embeddings del chunk {i+1} guardados en {embedding_file}")
+    print(f"  - Memoria liberada")
+
+print(f"\nTotal de archivos de embeddings: {len(embedding_files)}")
+
+# Cargar y combinar embeddings por chunks para evitar saturar memoria
+print("\nCargando embeddings por chunks para entrenamiento...")
+embeddings = None
+
+for i, embedding_file in enumerate(embedding_files):
+    print(f"Cargando embeddings chunk {i+1}/{len(embedding_files)}")
+    
+    chunk_embeddings = np.load(embedding_file)
+    
+    if embeddings is None:
+        embeddings = chunk_embeddings
+    else:
+        embeddings = np.vstack([embeddings, chunk_embeddings])
+    
+    # Limpiar memoria del chunk cargado
+    del chunk_embeddings
+    gc.collect()
+    
+    print(f"  - Embeddings acumulados: {embeddings.shape}")
+
+print(f"Embeddings finales: {embeddings.shape}")
+
+# Limpiar archivos temporales
+for embedding_file in embedding_files:
+    try:
+        import os
+        os.remove(embedding_file)
+        print(f"Archivo temporal eliminado: {embedding_file}")
+    except:
+        pass
+
+print("Memoria optimizada, continuando con entrenamiento...")
 
 params = {
         "embedding_model": "all-mpnet-base-v2",
@@ -218,10 +306,12 @@ params = {
     }
 
 for i in range(3):
+    print(f"\nEntrenando modelo {i+1}/3...")
     trainer = Trainer(dataset=dataset,
                     model_name="BERTopic",
                     params=params,
                     bt_embeddings=embeddings,
                     custom_dataset=custom,
                     verbose=True)
-    results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/tweets_preprocessed/bertopic_{i+1}")
+    results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/tweets_preprocessed_short/bertopic_{i+1}")
+    print(f"Modelo {i+1} entrenado y guardado")

@@ -16,7 +16,8 @@ base_packages = [
     "matplotlib>=3.4.3",
     "scikit_learn>=0.23.2",
     "srsly>=1.0.5",
-    "octis==1.10.2"
+    "octis==1.10.2",
+    "dask[dataframe]>=2023.8.0,<2024.0.0"
 ]
 
 bertopic_packages = [

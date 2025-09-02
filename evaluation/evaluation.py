@@ -9,6 +9,23 @@ from datetime import datetime
 from sklearn.feature_extraction.text import CountVectorizer
 from typing import Mapping, Any, List, Tuple
 
+# Monkey patch para compatibilidad con scikit-learn >= 1.0
+try:
+    from sklearn.feature_extraction.text import CountVectorizer
+    # Si get_feature_names no existe, crear un alias para get_feature_names_out
+    if not hasattr(CountVectorizer, 'get_feature_names'):
+        CountVectorizer.get_feature_names = CountVectorizer.get_feature_names_out
+except ImportError:
+    pass
+
+try:
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    # Si get_feature_names no existe, crear un alias para get_feature_names_out
+    if not hasattr(TfidfVectorizer, 'get_feature_names'):
+        TfidfVectorizer.get_feature_names = TfidfVectorizer.get_feature_names_out
+except ImportError:
+    pass
+
 try:
     from bertopic import BERTopic
 except ImportError:
