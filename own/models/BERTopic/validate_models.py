@@ -196,7 +196,7 @@ import gc
 import numpy as np
 
 # Cargar dataset como Dask DataFrame con bloques pequeños
-tweets_ddf = dd.read_csv('/app/own/datasets/tweets_preprocessed_short.txt', 
+tweets_ddf = dd.read_csv('/app/own/datasets/tweets_preprocessed.txt', 
                          header=None, 
                          blocksize='32MB')  # Bloques de 32MB para 8GB RAM
 
@@ -224,13 +224,13 @@ print(f"  - Chunks procesados: {len(chunks)} particiones")
 print(f"  - Total de tweets en chunks: {sum(len(chunk) for chunk in chunks):,}")
 
 # Prepare the documents and save them in an OCTIS-based format
-dataset, custom = "/app/own/datasets/tweets_preprocessed_short", True
+dataset, custom = "/app/own/datasets/tweets_preprocessed", True
 
 # Usar el primer chunk para preparar la estructura OCTIS
 first_chunk = chunks[0] if chunks else []
-dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/tweets_preprocessed_short.txt", docs=first_chunk)
-# Esto debe correrse al menos una vez para crear la carpeta tweets_preprocessed_short con los archivos (corpus.tsv, indexes.txt, metadata.json y vocabulary.txt)
-dataloader.preprocess_octis(output_folder="/app/own/datasets/tweets_preprocessed_short", documents_path="/app/own/datasets/tweets_preprocessed_short.txt")
+dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/tweets_preprocessed.txt", docs=first_chunk)
+# Esto debe correrse al menos una vez para crear la carpeta tweets_preprocessed con los archivos (corpus.tsv, indexes.txt, metadata.json y vocabulary.txt)
+dataloader.preprocess_octis(output_folder="/app/own/datasets/tweets_preprocessed", documents_path="/app/own/datasets/tweets_preprocessed.txt")
 
 # Prepare data
 data = dataloader.load_octis(custom)
@@ -313,5 +313,5 @@ for i in range(3):
                     bt_embeddings=embeddings,
                     custom_dataset=custom,
                     verbose=True)
-    results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/tweets_preprocessed_short/bertopic_{i+1}")
+    results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/tweets_preprocessed/bertopic_{i+1}")
     print(f"Modelo {i+1} entrenado y guardado")
