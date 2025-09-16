@@ -1,5 +1,9 @@
-# Usa una imagen base de Python
-FROM python:3.9
+# Imagen base ligera y multi-arch (funciona en M1 y Windows)
+FROM python:3.9-slim-bullseye
+
+# Evita que python guarde archivos .pyc y mejora logs
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
