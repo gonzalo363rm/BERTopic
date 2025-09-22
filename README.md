@@ -1,6 +1,20 @@
 # DOCKER
+
+## Instalación
 1. build: `docker build -t bertopic .`, agregando `--platform linux/amd64` para Apple Silicon.
-2. para que se repliquen los cambios: `docker run -v C:\Users\gonza\Desktop\J\wFacu\Tesina\Modelos\BERTopic:/app bertopic`
+2. para que se repliquen los cambios: `docker run -v /Users/federuhl/Documents/pruebas-tesina/BERTopic:/app bertopic`
+
+## Versiones compatibles
+El proyecto usa versiones específicas de dependencias para garantizar compatibilidad:
+- **Python**: 3.9
+- **numpy**: 1.26.4
+- **scikit-learn**: 1.6.1
+- **pandas**: 2.3.2
+- **bertopic**: 0.9.4
+- **octis**: 1.14.0
+- **umap-learn**: 0.5.9.post2
+
+Todas las versiones exactas están documentadas en `requirements.txt`.
 
 # BERTopic
 ### Para correr

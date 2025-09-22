@@ -1,5 +1,5 @@
-# Imagen base ligera y multi-arch (funciona en M1 y Windows)
-FROM python:3.9-slim-bullseye
+# Imagen multi-arch (funciona en M1 y Windows)
+FROM python:3.9-bookworm
 
 # Evita que python guarde archivos .pyc y mejora logs
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -19,12 +19,9 @@ RUN mkdir -p own/results/Basic/20NewsGroup \
     own/results/Basic/tweets_municipalidad_short \
     own/results/Basic/tweets_preprocessed
 
-# Instala las dependencias
-RUN pip install numpy==1.21.6
-RUN pip install -e .
-RUN pip install bertopic==0.9.4
-# Instalamos la ultima version en la que aun existe la función "append" de pandas
-RUN pip install pandas==1.5.3
+# Instala las dependencias con versiones exactas que funcionan
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 
 # Establece el comando predeterminado para ejecutar al iniciar el contenedor
 CMD ["tail", "-f", "/dev/null"]
