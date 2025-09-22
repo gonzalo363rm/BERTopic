@@ -47,6 +47,13 @@ Todas las versiones exactas están documentadas en `requirements.txt`.
 | **npmi**      | 0.193836 |
 | **diversity** | 0.637442 |
 
+## Resultados elecciones Argentina
+| Métrica       | Valor     |
+|---------------|-----------|
+| **cv**        | 0.361299  |
+| **npmi**      | -0.010353 |
+| **diversity** | 0.805048  |
+
 # LDA
 ### Para correr
 1. cd own/models/LDA

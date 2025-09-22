@@ -4,19 +4,25 @@ from evaluation import Results
 print("##########\nRESULTADOS DEL AUTOR\n##########")
 results = Results("../../../results/", combine_models=True);
 
+# Ver qué datasets están disponibles
+print("Datasets disponibles:", results.get_keys())
+
 print("##########\nDATASET BBC NEWS\n##########")
-print(results.get_data("BBC_news", aggregated=True))
+print(results.get_data("BBC News", aggregated=True))
 
 print("##########\nDATASET 20 NEWS GROUP\n##########")
 print(results.get_data("20NewsGroup", aggregated=True))
 
 print("##########\nDATASET TRUMP\n##########")
-print(results.get_data("trump", aggregated=True))
+print(results.get_data("Trump", aggregated=True))
 
 ##########
 
 print("##########\nRESULTADOS PROPIOS\n##########")
 results2 = Results("/app/own/models/BERTopic/results/", combine_models=True);
+
+# Ver qué datasets están disponibles
+print("Datasets disponibles:", results2.get_keys())
 
 print("##########\nDATASET BBC NEWS\n##########")
 print(results2.get_data("BBC_News", aggregated=True))
@@ -25,10 +31,16 @@ print("##########\nDATASET 20 NEWS GROUP\n##########")
 print(results2.get_data("20NewsGroup", aggregated=True))
 
 print("##########\nDATASET TRUMP\n##########")
-print(results2.get_data("../../datasets/trump", aggregated=True))
+print(results2.get_data("Trump", aggregated=True))
 
-print("##########\nDATASET TWEETS MUNICIPALIDAD\n##########")
-print(results2.get_data("/app/own/datasets/tweets_municipalidad", aggregated=True))
+# print("##########\nDATASET TWEETS MUNICIPALIDAD\n##########")
+# print(results2.get_data("tweets_municipalidad", aggregated=True))
 
-print("##########\nDATASET SENADORES\n##########")
-print(results2.get_data("/app/own/datasets/senadores", aggregated=True))
+# print("##########\nDATASET SENADORES\n##########")
+# print(results2.get_data("senadores", aggregated=True))
+
+print("##########\nDATASET TWEETS PREPROCESSED\n##########")
+print(results2.get_data("tweets_preprocessed", aggregated=True))
+
+# print("##########\nDATASET TWEETS BALOTAJE\n##########")
+# print(results2.get_data("tweets_balotaje_preprocessed", aggregated=True))

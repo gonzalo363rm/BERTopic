@@ -19,12 +19,20 @@ class Results:
     def get_data(self, name, dtm: bool = False, aggregated: bool = False):
         if dtm:
             if aggregated:
-                return self.dtm_results[name].groupby("Model").mean()
+                return self.dtm_results[name].groupby("Model").agg({
+                    "cv": "mean",
+                    "npmi": "mean", 
+                    "diversity": "mean"
+                })
             else:
                 return self.dtm_results[name]
         else:
             if aggregated:
-                return self.basic_results[name].groupby("Model").mean()
+                return self.basic_results[name].groupby("Model").agg({
+                    "cv": "mean",
+                    "npmi": "mean", 
+                    "diversity": "mean"
+                })
             else:
                 return self.basic_results[name]
 
@@ -127,15 +135,11 @@ class Results:
             data = {
                 dataset: (
                     dataframe.groupby("Model")
-                    .mean()
-                    .loc[
-                        :,
-                        [
-                            "cv",
-                            "npmi",
-                            "diversity",
-                        ],
-                    ]
+                    .agg({
+                        "cv": "mean",
+                        "npmi": "mean", 
+                        "diversity": "mean"
+                    })
                     .reset_index()
                 )
                 for dataset, dataframe in self.dtm_results.items()
@@ -144,29 +148,39 @@ class Results:
             data = {
                 dataset: (
                     dataframe.groupby("Model")
-                    .mean()
-                    .loc[
-                        :,
-                        [
-                            "cv",
-                            "npmi",
-                            "diversity",
-                        ],
-                    ]
+                    .agg({
+                        "cv": "mean",
+                        "npmi": "mean", 
+                        "diversity": "mean"
+                    })
                     .reset_index()
                 )
                 for dataset, dataframe in self.basic_results.items()
             }
 
         # Sort by model before concatenating
-        order = data[list(data.keys())[-1]].sort_values("npmi")["Model"].tolist()
-        models = pd.DataFrame({"Model": order})
+        # Get all unique models across all datasets
+        all_models = set()
+        for dataset in data.keys():
+            all_models.update(data[dataset]["Model"].tolist())
+        
+        # Sort by npmi from the first available dataset
+        first_dataset = list(data.keys())[0]
+        order = data[first_dataset].sort_values("npmi")["Model"].tolist()
+        
+        # Create models DataFrame with all available models
+        models = pd.DataFrame({"Model": list(all_models)})
 
         for dataset in data.keys():
+            # Get the models that exist in this dataset
+            available_models = data[dataset]["Model"].tolist()
+            # Filter order to only include models that exist in this dataset
+            filtered_order = [model for model in order if model in available_models]
+            
             data[dataset] = (
                 data[dataset]
                 .set_index("Model")
-                .loc[order]
+                .loc[filtered_order]
                 .reset_index()
                 .drop("Model", axis=1)
             )
@@ -278,7 +292,9 @@ class Results:
         for column in ["cv", "npmi", "diversity"]:
             results[column] = results[column].astype(float)
 
-        self.basic_results[dataset] = results
+        # Get the dataset name from the folder path
+        dataset_name = os.path.basename(folder)
+        self.basic_results[dataset_name] = results
 
     def _load_dtm_results(self, folder):
         datasets = os.listdir(folder)
@@ -345,7 +361,9 @@ class Results:
         for column in ["cv", "npmi", "diversity"]:
             results[column] = results[column].astype(float)
 
-        self.dtm_results[dataset] = results
+        # Get the dataset name from the folder path
+        dataset_name = os.path.basename(folder)
+        self.dtm_results[dataset_name] = results
 
     def _load_computation_results(self):
         path = "/app/results/Computation/" # NOTA: se ajusto el path para que funcione con docker
@@ -357,7 +375,7 @@ class Results:
         for file in files[1:]:
             df_to_add = pd.read_csv(path + file)
             df_to_add["model"] = file
-            computation = computation.append(df_to_add)
+            computation = pd.concat([computation, df_to_add], ignore_index=True)
 
         self.computation = computation
 
@@ -382,13 +400,13 @@ class Results:
 
             if confidence_interval:
                 # Define variables to plot
-                y_mean = selection.groupby("nr_topics").mean()[y]
+                y_mean = selection.groupby("nr_topics").agg({y: "mean"})[y]
                 x_vals = y_mean.index
 
                 # Compute upper and lower bounds using chosen uncertainty measure: here
                 # it is a fraction of the standard deviation of measurements at each
                 # time point based on the unbiased sample variance
-                y_std = selection.groupby("nr_topics").std()[y]
+                y_std = selection.groupby("nr_topics").agg({y: "std"})[y]
                 error = 0.5 * y_std
                 lower = y_mean - error
                 upper = y_mean + error
