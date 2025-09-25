@@ -61,6 +61,13 @@ import gensim.corpora as corpora
 from gensim.models import ldaseqmodel
 
 
+class CustomJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if hasattr(obj, '__class__') and 'FeatureExtractionPipeline' in str(type(obj)):
+            return f"<transformers.pipelines.feature_extraction.FeatureExtractionPipeline object at {hex(id(obj))}>"
+        return super().default(obj)
+
+
 class Trainer:
     """Train and evaluate a topic model
 
@@ -198,7 +205,7 @@ class Trainer:
 
         if save:
             with open(f"{save}.json", "w", encoding="utf-8") as f:
-                json.dump(results, f, ensure_ascii=False)
+                json.dump(results, f, ensure_ascii=False, cls=CustomJSONEncoder)
 
             try:
                 from google.colab import files
