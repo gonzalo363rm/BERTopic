@@ -42,5 +42,5 @@ print(results2.get_data("Trump", aggregated=True))
 print("##########\nDATASET TWEETS PREPROCESSED\n##########")
 print(results2.get_data("tweets_preprocessed", aggregated=True))
 
-# print("##########\nDATASET TWEETS BALOTAJE\n##########")
-# print(results2.get_data("tweets_balotaje_preprocessed", aggregated=True))
+print("##########\nDATASET TWEETS PREPROCESSED BETO\n##########")
+print(results2.get_data("tweets_preprocessed_beto", aggregated=True))
