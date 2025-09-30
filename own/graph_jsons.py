@@ -4,14 +4,14 @@ import os
 import numpy as np
 from collections import defaultdict
 
-model_name = "NMF"
-dataset = "tweets_municipalidad"
+model_name = "BERTopic"
+dataset = "tweets_preprocessed"
 
 # Path to the folder containing JSON files
-folder_path = fr"C:\Users\gonza\Desktop\J\wFacu\Tesina\Modelos\BERTopic\own\models\{model_name.lower()}\results\Basic\{dataset}"
+folder_path = os.path.join("models", model_name.lower(), "results", "Basic", dataset)
 
 # Path to save the graph
-output_folder = r"C:\Users\gonza\Desktop\J\wFacu\Tesina\Modelos\BERTopic\own\graphs"
+output_folder = "graphs"
 os.makedirs(output_folder, exist_ok=True)  # Crear la carpeta si no existe
 
 # List of JSON files
