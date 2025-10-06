@@ -1,0 +1,410 @@
+[
+  {
+    "Dataset": "/app/own/datasets/tweets_preprocessed_beto",
+    "Dataset Size": 200000,
+    "Model": "BERTopic",
+    "Params": {
+      "embedding_model": "hiiamsid/sentence_similarity_spanish_es",
+      "nr_topics": 3,
+      "min_topic_size": 100,
+      "verbose": true,
+      "calculate_probabilities": false
+    },
+    "Scores": {
+      "cv": 0.4075280028464157,
+      "npmi": 0.0329902987084253,
+      "diversity": 0.7333333333333333
+    },
+    "Computation Time": 6718.693465709686,
+    "Topics": [
+      [
+        "argentino",
+        "balotaje",
+        "hoy",
+        "día",
+        "elección",
+        "votar",
+        "venezuela",
+        "presidente",
+        "decidir",
+        "macri"
+      ],
+      [
+        "macri",
+        "presidente",
+        "cambiar",
+        "cambio",
+        "voto",
+        "hoy",
+        "pensar",
+        "mauricio",
+        "scioli",
+        "blanco"
+      ],
+      [
+        "scioli",
+        "presidente",
+        "votar",
+        "macri",
+        "daniel",
+        "vamos",
+        "gracia",
+        "corazón",
+        "mundo",
+        "cambiar"
+      ]
+    ]
+  },
+  {
+    "Dataset": "/app/own/datasets/tweets_preprocessed_beto",
+    "Dataset Size": 200000,
+    "Model": "BERTopic",
+    "Params": {
+      "embedding_model": "hiiamsid/sentence_similarity_spanish_es",
+      "nr_topics": 3,
+      "min_topic_size": 150,
+      "verbose": true,
+      "calculate_probabilities": false
+    },
+    "Scores": {
+      "cv": 0.3652499069075367,
+      "npmi": 0.007989200358715321,
+      "diversity": 0.7333333333333333
+    },
+    "Computation Time": 13110.390114545822,
+    "Topics": [
+      [
+        "scioli",
+        "presidente",
+        "votar",
+        "macri",
+        "mejor",
+        "voto",
+        "hablar",
+        "optar",
+        "blanco",
+        "daniel"
+      ],
+      [
+        "argentino",
+        "hoy",
+        "venezuela",
+        "elección",
+        "decidir",
+        "votar",
+        "día",
+        "macri",
+        "presidente",
+        "scioli"
+      ],
+      [
+        "macri",
+        "presidente",
+        "cambiar",
+        "cambio",
+        "hoy",
+        "mauricio",
+        "pensar",
+        "compatriota",
+        "él",
+        "scioli"
+      ]
+    ]
+  },
+  {
+    "Dataset": "/app/own/datasets/tweets_preprocessed_beto",
+    "Dataset Size": 200000,
+    "Model": "BERTopic",
+    "Params": {
+      "embedding_model": "hiiamsid/sentence_similarity_spanish_es",
+      "nr_topics": 3,
+      "min_topic_size": 200,
+      "verbose": true,
+      "calculate_probabilities": false
+    },
+    "Scores": {
+      "cv": 0.39597288307110406,
+      "npmi": 0.025029847304331443,
+      "diversity": 0.7666666666666667
+    },
+    "Computation Time": 8419.31171131134,
+    "Topics": [
+      [
+        "argentino",
+        "hoy",
+        "día",
+        "venezuela",
+        "histórico",
+        "votar",
+        "decidir",
+        "elección",
+        "macri",
+        "ganar"
+      ],
+      [
+        "scioli",
+        "presidente",
+        "votar",
+        "mejor",
+        "macri",
+        "optar",
+        "daniel",
+        "voto",
+        "vamos",
+        "ganar"
+      ],
+      [
+        "macri",
+        "presidente",
+        "cambiar",
+        "voto",
+        "cambio",
+        "hoy",
+        "pensar",
+        "blanco",
+        "mauricio",
+        "compatriota"
+      ]
+    ]
+  },
+  {
+    "Dataset": "/app/own/datasets/tweets_preprocessed_beto",
+    "Dataset Size": 200000,
+    "Model": "BERTopic",
+    "Params": {
+      "embedding_model": "hiiamsid/sentence_similarity_spanish_es",
+      "nr_topics": 5,
+      "min_topic_size": 100,
+      "verbose": true,
+      "calculate_probabilities": false
+    },
+    "Scores": {
+      "cv": 0.40558924823558007,
+      "npmi": -0.004536719290913616,
+      "diversity": 0.7
+    },
+    "Computation Time": 5814.091277599335,
+    "Topics": [
+      [
+        "argentino",
+        "hoy",
+        "día",
+        "venezuela",
+        "vamos",
+        "histórico",
+        "elección",
+        "votar",
+        "decidir",
+        "macri"
+      ],
+      [
+        "macri",
+        "presidente",
+        "cambiar",
+        "cambio",
+        "hoy",
+        "mauricio",
+        "compatriota",
+        "voto",
+        "aire",
+        "buen"
+      ],
+      [
+        "scioli",
+        "voto",
+        "votar",
+        "daniel",
+        "blanco",
+        "macri",
+        "hoy",
+        "oculto",
+        "diez",
+        "música"
+      ],
+      [
+        "presidente",
+        "macri",
+        "pensar",
+        "scioli",
+        "obligar",
+        "cambio",
+        "votar",
+        "foto",
+        "paciente",
+        "atender"
+      ],
+      [
+        "scioli",
+        "mejor",
+        "presidente",
+        "optar",
+        "patria",
+        "votar",
+        "saber",
+        "ganar",
+        "escaber",
+        "voto"
+      ]
+    ]
+  },
+  {
+    "Dataset": "/app/own/datasets/tweets_preprocessed_beto",
+    "Dataset Size": 200000,
+    "Model": "BERTopic",
+    "Params": {
+      "embedding_model": "hiiamsid/sentence_similarity_spanish_es",
+      "nr_topics": 5,
+      "min_topic_size": 150,
+      "verbose": true,
+      "calculate_probabilities": false
+    },
+    "Scores": {
+      "cv": 0.4082098669811486,
+      "npmi": 0.04531219598157697,
+      "diversity": 0.7
+    },
+    "Computation Time": 5497.201855421066,
+    "Topics": [
+      [
+        "argentino",
+        "hoy",
+        "venezuela",
+        "día",
+        "histórico",
+        "votar",
+        "decidir",
+        "elección",
+        "scioli",
+        "presidente"
+      ],
+      [
+        "presidente",
+        "macri",
+        "cambiar",
+        "cambio",
+        "scioli",
+        "vamos",
+        "compatriota",
+        "mauricio",
+        "hoy",
+        "votar"
+      ],
+      [
+        "elección",
+        "balotaje",
+        "votar",
+        "saber",
+        "tranquilidad",
+        "elijar",
+        "voto",
+        "feliz",
+        "paz",
+        "día"
+      ],
+      [
+        "votar",
+        "macri",
+        "voto",
+        "blanco",
+        "scioli",
+        "jaja",
+        "gente",
+        "encuesta",
+        "tarde",
+        "decir"
+      ],
+      [
+        "macri",
+        "pensar",
+        "voto",
+        "hoy",
+        "scioli",
+        "lista",
+        "él",
+        "juicio",
+        "obligar",
+        "reconocer"
+      ]
+    ]
+  },
+  {
+    "Dataset": "/app/own/datasets/tweets_preprocessed_beto",
+    "Dataset Size": 200000,
+    "Model": "BERTopic",
+    "Params": {
+      "embedding_model": "hiiamsid/sentence_similarity_spanish_es",
+      "nr_topics": 5,
+      "min_topic_size": 200,
+      "verbose": true,
+      "calculate_probabilities": false
+    },
+    "Scores": {
+      "cv": 0.42380683216306886,
+      "npmi": 0.049249328170425995,
+      "diversity": 0.64
+    },
+    "Computation Time": 3149.6916043758392,
+    "Topics": [
+      [
+        "argentino",
+        "hoy",
+        "día",
+        "venezuela",
+        "histórico",
+        "decidir",
+        "elección",
+        "votar",
+        "presidente",
+        "domingo"
+      ],
+      [
+        "macri",
+        "presidente",
+        "cambiar",
+        "cambio",
+        "pensar",
+        "hoy",
+        "mauricio",
+        "compatriota",
+        "él",
+        "scioli"
+      ],
+      [
+        "elección",
+        "balotaje",
+        "votar",
+        "tranquilidad",
+        "elijar",
+        "día",
+        "hoy",
+        "feliz",
+        "paz",
+        "voto"
+      ],
+      [
+        "scioli",
+        "voto",
+        "votar",
+        "daniel",
+        "macri",
+        "blanco",
+        "hoy",
+        "ganar",
+        "elección",
+        "hermana"
+      ],
+      [
+        "scioli",
+        "presidente",
+        "mejor",
+        "optar",
+        "votar",
+        "macri",
+        "vamos",
+        "ganar",
+        "voto",
+        "patria"
+      ]
+    ]
+  }
+]

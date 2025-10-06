@@ -1,0 +1,410 @@
+[
+  {
+    "Dataset": "/app/own/datasets/tweets_preprocessed_beto",
+    "Dataset Size": 200000,
+    "Model": "BERTopic",
+    "Params": {
+      "embedding_model": "hiiamsid/sentence_similarity_spanish_es",
+      "nr_topics": 3,
+      "min_topic_size": 100,
+      "verbose": true,
+      "calculate_probabilities": false
+    },
+    "Scores": {
+      "cv": 0.3530849108470006,
+      "npmi": 0.022793815594165726,
+      "diversity": 0.7666666666666667
+    },
+    "Computation Time": 4203.724111557007,
+    "Topics": [
+      [
+        "argentino",
+        "hoy",
+        "día",
+        "venezuela",
+        "elección",
+        "histórico",
+        "decidir",
+        "macri",
+        "votar",
+        "presidente"
+      ],
+      [
+        "macri",
+        "cambiar",
+        "presidente",
+        "voto",
+        "hoy",
+        "cambio",
+        "mauricio",
+        "blanco",
+        "compatriota",
+        "saber"
+      ],
+      [
+        "presidente",
+        "macri",
+        "scioli",
+        "vamos",
+        "cambio",
+        "momento",
+        "votar",
+        "poderoso",
+        "victor",
+        "llegado"
+      ]
+    ]
+  },
+  {
+    "Dataset": "/app/own/datasets/tweets_preprocessed_beto",
+    "Dataset Size": 200000,
+    "Model": "BERTopic",
+    "Params": {
+      "embedding_model": "hiiamsid/sentence_similarity_spanish_es",
+      "nr_topics": 3,
+      "min_topic_size": 150,
+      "verbose": true,
+      "calculate_probabilities": false
+    },
+    "Scores": {
+      "cv": 0.3793955354288417,
+      "npmi": 0.00836608798511196,
+      "diversity": 0.8333333333333334
+    },
+    "Computation Time": 5960.782320976257,
+    "Topics": [
+      [
+        "argentino",
+        "balotaje",
+        "hoy",
+        "día",
+        "elección",
+        "votar",
+        "histórico",
+        "venezuela",
+        "decidir",
+        "scioli"
+      ],
+      [
+        "macri",
+        "presidente",
+        "cambiar",
+        "voto",
+        "cambio",
+        "hoy",
+        "pensar",
+        "mauricio",
+        "blanco",
+        "compatriota"
+      ],
+      [
+        "scioli",
+        "presidente",
+        "votar",
+        "mejor",
+        "vamos",
+        "macri",
+        "optar",
+        "daniel",
+        "lista",
+        "ganar"
+      ]
+    ]
+  },
+  {
+    "Dataset": "/app/own/datasets/tweets_preprocessed_beto",
+    "Dataset Size": 200000,
+    "Model": "BERTopic",
+    "Params": {
+      "embedding_model": "hiiamsid/sentence_similarity_spanish_es",
+      "nr_topics": 3,
+      "min_topic_size": 200,
+      "verbose": true,
+      "calculate_probabilities": false
+    },
+    "Scores": {
+      "cv": 0.39319899291556754,
+      "npmi": 0.020918812208501086,
+      "diversity": 0.7666666666666667
+    },
+    "Computation Time": 3952.804049730301,
+    "Topics": [
+      [
+        "scioli",
+        "presidente",
+        "votar",
+        "mejor",
+        "voto",
+        "macri",
+        "optar",
+        "daniel",
+        "papa",
+        "hoy"
+      ],
+      [
+        "argentino",
+        "hoy",
+        "día",
+        "venezuela",
+        "histórico",
+        "decidir",
+        "votar",
+        "presidente",
+        "elección",
+        "macri"
+      ],
+      [
+        "macri",
+        "presidente",
+        "cambiar",
+        "cambio",
+        "hoy",
+        "pensar",
+        "mauricio",
+        "mucho",
+        "compatriota",
+        "ganar"
+      ]
+    ]
+  },
+  {
+    "Dataset": "/app/own/datasets/tweets_preprocessed_beto",
+    "Dataset Size": 200000,
+    "Model": "BERTopic",
+    "Params": {
+      "embedding_model": "hiiamsid/sentence_similarity_spanish_es",
+      "nr_topics": 5,
+      "min_topic_size": 100,
+      "verbose": true,
+      "calculate_probabilities": false
+    },
+    "Scores": {
+      "cv": 0.35968967926238926,
+      "npmi": 0.014766539083813951,
+      "diversity": 0.66
+    },
+    "Computation Time": 5379.505210161209,
+    "Topics": [
+      [
+        "argentino",
+        "hoy",
+        "día",
+        "venezuela",
+        "histórico",
+        "elección",
+        "decidir",
+        "votar",
+        "macri",
+        "domingo"
+      ],
+      [
+        "scioli",
+        "mejor",
+        "voto",
+        "votar",
+        "presidente",
+        "hoy",
+        "optar",
+        "daniel",
+        "ganar",
+        "macri"
+      ],
+      [
+        "macri",
+        "presidente",
+        "cambiar",
+        "cambio",
+        "pensar",
+        "mauricio",
+        "hoy",
+        "compatriota",
+        "votar",
+        "obligar"
+      ],
+      [
+        "ganar",
+        "macri",
+        "hablar",
+        "scioli",
+        "diferencia",
+        "jaja",
+        "decir",
+        "votar",
+        "argentino",
+        "kirchner"
+      ],
+      [
+        "presidente",
+        "scioli",
+        "macri",
+        "vamos",
+        "cambio",
+        "momento",
+        "votar",
+        "poderoso",
+        "victor",
+        "llegado"
+      ]
+    ]
+  },
+  {
+    "Dataset": "/app/own/datasets/tweets_preprocessed_beto",
+    "Dataset Size": 200000,
+    "Model": "BERTopic",
+    "Params": {
+      "embedding_model": "hiiamsid/sentence_similarity_spanish_es",
+      "nr_topics": 5,
+      "min_topic_size": 150,
+      "verbose": true,
+      "calculate_probabilities": false
+    },
+    "Scores": {
+      "cv": 0.360278932281872,
+      "npmi": -0.017917612566369305,
+      "diversity": 0.66
+    },
+    "Computation Time": 6970.010406732559,
+    "Topics": [
+      [
+        "argentino",
+        "hoy",
+        "día",
+        "venezuela",
+        "histórico",
+        "decidir",
+        "votar",
+        "elección",
+        "domingo",
+        "presidente"
+      ],
+      [
+        "macri",
+        "presidente",
+        "voto",
+        "cambio",
+        "hoy",
+        "blanco",
+        "compatriota",
+        "mauricio",
+        "cambiar",
+        "scioli"
+      ],
+      [
+        "scioli",
+        "presidente",
+        "mejor",
+        "optar",
+        "vamos",
+        "votar",
+        "macri",
+        "ganar",
+        "patria",
+        "voto"
+      ],
+      [
+        "cambiar",
+        "esperar",
+        "hoy",
+        "escaber",
+        "alegría",
+        "mejor",
+        "ganar",
+        "día",
+        "esperanza",
+        "cambio"
+      ],
+      [
+        "scioli",
+        "votar",
+        "daniel",
+        "macri",
+        "oculto",
+        "saber",
+        "voto",
+        "votarío",
+        "votarás",
+        "votado"
+      ]
+    ]
+  },
+  {
+    "Dataset": "/app/own/datasets/tweets_preprocessed_beto",
+    "Dataset Size": 200000,
+    "Model": "BERTopic",
+    "Params": {
+      "embedding_model": "hiiamsid/sentence_similarity_spanish_es",
+      "nr_topics": 5,
+      "min_topic_size": 200,
+      "verbose": true,
+      "calculate_probabilities": false
+    },
+    "Scores": {
+      "cv": 0.3723102370654391,
+      "npmi": 0.016247479268775754,
+      "diversity": 0.68
+    },
+    "Computation Time": 6274.399511098862,
+    "Topics": [
+      [
+        "argentino",
+        "hoy",
+        "día",
+        "venezuela",
+        "histórico",
+        "elección",
+        "decidir",
+        "votar",
+        "macri",
+        "presidente"
+      ],
+      [
+        "scioli",
+        "votar",
+        "voto",
+        "macri",
+        "hablar",
+        "ganar",
+        "daniel",
+        "blanco",
+        "diferencia",
+        "hoy"
+      ],
+      [
+        "macri",
+        "presidente",
+        "cambio",
+        "compatriota",
+        "mauricio",
+        "pensar",
+        "obligar",
+        "scioli",
+        "votar",
+        "hoy"
+      ],
+      [
+        "scioli",
+        "presidente",
+        "mejor",
+        "optar",
+        "vamos",
+        "votar",
+        "macri",
+        "voto",
+        "ganar",
+        "hoy"
+      ],
+      [
+        "elección",
+        "esperar",
+        "saber",
+        "oculto",
+        "convivencia",
+        "conducir",
+        "valor",
+        "ubicar",
+        "correcto",
+        "responsabilidad"
+      ]
+    ]
+  }
+]
