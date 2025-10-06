@@ -54,6 +54,13 @@ Todas las versiones exactas están documentadas en `requirements.txt`.
 | **npmi**      | -0.010353 |
 | **diversity** | 0.805048  |
 
+## Resultados elecciones Argentina (beto)
+| Métrica       | Valor     |
+|---------------|-----------|
+| **cv**        | 0.370609  |
+| **npmi**      | 0.009341 |
+| **diversity** | 0.791249 |
+
 # LDA
 ### Para correr
 1. cd own/models/LDA
