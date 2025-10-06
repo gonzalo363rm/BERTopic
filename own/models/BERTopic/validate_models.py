@@ -1,5 +1,7 @@
 from evaluation import Trainer, DataLoader
 from sentence_transformers import SentenceTransformer
+from transformers.pipelines import pipeline
+import numpy as np
 
 #=========================================
 #
@@ -192,26 +194,86 @@ from sentence_transformers import SentenceTransformer
 # =========================================
 
 # Abre el archivo en modo de lectura
-with open('/app/own/datasets/tweets_preprocessed.txt', 'r', encoding='utf-8') as file:
+# with open('/app/own/datasets/tweets_preprocessed.txt', 'r', encoding='utf-8') as file:
+#     # Lee las líneas
+#     tweets_preprocessed = file.readlines()
+
+# # Prepare the documents and save them in an OCTIS-based format
+# dataset, custom = "/app/own/datasets/tweets_preprocessed", True
+# dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/tweets_preprocessed.txt", docs=tweets_preprocessed)
+# # Esto debe correrse al menos una vez para crear la carpeta tweets_preprocessed con los archivos (corpus.tsv, indexes.txt, metadata.json y vocabulary.txt)
+# dataloader.preprocess_octis(output_folder="/app/own/datasets/tweets_preprocessed", documents_path="/app/own/datasets/tweets_preprocessed.txt")
+
+# # Prepare data
+# data = dataloader.load_octis(custom)
+# data = [" ".join(words) for words in data.get_corpus()]
+
+# # Extract embeddings
+# model = SentenceTransformer("all-mpnet-base-v2")
+# embeddings = model.encode(data, show_progress_bar=True)
+
+# params = {
+#         "embedding_model": "all-mpnet-base-v2",
+#         "nr_topics": [(i+1)*5 for i in range(10)],
+#         "min_topic_size": 15,
+#         "verbose": True
+#     }
+
+# for i in range(3):
+#     trainer = Trainer(dataset=dataset,
+#                     model_name="BERTopic",
+#                     params=params,
+#                     bt_embeddings=embeddings,
+#                     custom_dataset=custom,
+#                     verbose=True)
+#     results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/tweets_preprocessed/bertopic_{i+1}")
+
+# =========================================
+# 
+# BERTopic_tweets_preprocessed usando BETO como embedding
+# 
+# =========================================
+
+# Abre el archivo en modo de lectura
+with open('/app/own/datasets/tweets_preprocessed_beto.txt', 'r', encoding='utf-8') as file:
     # Lee las líneas
-    tweets_preprocessed = file.readlines()
+    tweets_preprocessed_beto = file.readlines()
 
 # Prepare the documents and save them in an OCTIS-based format
-dataset, custom = "/app/own/datasets/tweets_preprocessed", True
-dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/tweets_preprocessed.txt", docs=tweets_preprocessed)
-# Esto debe correrse al menos una vez para crear la carpeta tweets_preprocessed con los archivos (corpus.tsv, indexes.txt, metadata.json y vocabulary.txt)
-dataloader.preprocess_octis(output_folder="/app/own/datasets/tweets_preprocessed", documents_path="/app/own/datasets/tweets_preprocessed.txt")
+dataset, custom = "/app/own/datasets/tweets_preprocessed_beto", True
+dataloader = DataLoader(dataset).prepare_docs(save="/app/own/datasets/tweets_preprocessed_beto.txt", docs=tweets_preprocessed_beto)
+# Esto debe correrse al menos una vez para crear la carpeta tweets_preprocessed_beto con los archivos (corpus.tsv, indexes.txt, metadata.json y vocabulary.txt)
+dataloader.preprocess_octis(output_folder="/app/own/datasets/tweets_preprocessed_beto", documents_path="/app/own/datasets/tweets_preprocessed_beto.txt")
 
 # Prepare data
 data = dataloader.load_octis(custom)
 data = [" ".join(words) for words in data.get_corpus()]
 
 # Extract embeddings
-model = SentenceTransformer("all-mpnet-base-v2")
-embeddings = model.encode(data, show_progress_bar=True)
+embedding_model = pipeline("feature-extraction", model="dccuchile/bert-base-spanish-wwm-uncased")
+
+# Calcular embeddings MANUALMENTE una sola vez
+print("Calculando embeddings...")
+embeddings = []
+
+# Procesar por lotes pequeños para mejor rendimiento
+batch_size = 8
+for i in range(0, len(data), batch_size):
+    if i % 1000 == 0:
+        print(f"Procesando lote {i//batch_size + 1}/{(len(data)-1)//batch_size + 1}")
+    
+    batch = data[i:i+batch_size]
+    batch_embeddings = embedding_model(batch, return_tensors="pt")
+    
+    # Tomar el promedio de todos los tokens para cada documento
+    for j in range(len(batch)):
+        embeddings.append(batch_embeddings[j].mean(dim=1).squeeze().detach().numpy())
+
+embeddings = np.array(embeddings)
+# print(f"Embeddings calculados: {embeddings.shape}")
 
 params = {
-        "embedding_model": "all-mpnet-base-v2",
+        "embedding_model": embedding_model,
         "nr_topics": [(i+1)*5 for i in range(10)],
         "min_topic_size": 15,
         "verbose": True
@@ -224,4 +286,4 @@ for i in range(3):
                     bt_embeddings=embeddings,
                     custom_dataset=custom,
                     verbose=True)
-    results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/tweets_preprocessed/bertopic_{i+1}")
+    results = trainer.train(save=f"/app/own/models/BERTopic/results/Basic/tweets_preprocessed_beto/bertopic_{i+1}")
