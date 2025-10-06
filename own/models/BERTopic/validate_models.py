@@ -311,11 +311,11 @@ data = dataloader.load_octis(custom)
 data = [" ".join(words) for words in data.get_corpus()]
 
 # Extract embeddings
-model = SentenceTransformer('hiiamsid/sentence_similarity_spanish_es')
+model = SentenceTransformer("hiiamsid/sentence_similarity_spanish_es")
 embeddings = model.encode(data, show_progress_bar=True)
 
 params = {
-        "embedding_model": embedding_model,
+        "embedding_model": "hiiamsid/sentence_similarity_spanish_es",
         "nr_topics": [(i+1)*5 for i in range(10)],
         "min_topic_size": 15,
         "verbose": True
